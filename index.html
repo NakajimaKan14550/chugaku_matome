@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教えてプロの人！特設アーカイブ | CHRONIX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #020b14;
+            --card-bg: #091a2d;
+            --accent-gold: #d4af37;
+            --accent-cyan: #00f2fe;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* 宇宙サイバー感のある背景グラデーション装飾 */
+        .bg-glow {
+            position: fixed;
+            top: -10%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(13,77,77,0.3) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* ヘッダー */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(2, 11, 20, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo-box {
+            font-weight: 900;
+            color: #fff;
+            font-size: 20px;
+            letter-spacing: 2px;
+            border-left: 4px solid var(--accent-gold);
+            padding-left: 12px;
+        }
+        .btn-home {
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 13px;
+            font-weight: bold;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 18px;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        .btn-home:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        /* ヒーローセクション */
+        .hero {
+            text-align: center;
+            padding: 60px 20px 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .badge {
+            display: inline-block;
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+            padding: 4px 15px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            background: rgba(212,175,55,0.05);
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 0 0 15px 0;
+            background: linear-gradient(135deg, #fff 0%, var(--text-muted) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin: 0;
+        }
+
+        /* メイングリッドエリア */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px 100px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 30px;
+        }
+
+        /* アーカイブカードスタイル */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+        }
+        /* 近未来的な光のホバー効果 */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(0,242,254,0.1) 0%, rgba(0,0,0,0) 50%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 20px 40px rgba(0, 242, 254, 0.08);
+        }
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: var(--accent-cyan);
+            margin-bottom: 15px;
+        }
+        .card-title {
+            margin: 0 0 12px 0;
+            font-size: 18px;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.4;
+        }
+        .card-text {
+            margin: 0;
+            font-size: 13.5px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        .card-footer {
+            padding: 0 30px 30px;
+            display: flex;
+            align-items: center;
+            color: var(--accent-gold);
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+        .card-footer i {
+            margin-left: 6px;
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+        .card:hover .card-footer i {
+            transform: translateX(5px);
+        }
+
+        /* フッター */
+        footer {
+            background: #01060c;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #475569;
+            border-top: 1px solid rgba(255,255,255,0.02);
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+
+<header>
+    <div class="logo-box">CHRONIX</div>
+    <a href="https://nakajimakan14550.github.io/home/" class="btn-home">
+        <i class="fas fa-arrow-left" style="margin-right: 6px;"></i> 企業TOPへ戻る
+    </a>
+</header>
+
+<div class="hero">
+    <div class="badge">JUNIOR HIGH ARCHIVES</div>
+    <h1>教えてプロの人！<br>技術解説特設アーカイブ</h1>
+    <p>中学生から学べる、暮らしや未来を守るハイテクセンサーと数理の秘密</p>
+</div>
+
+<div class="container">
+    <div class="grid">
+
+        <a href="https://nakajimakan14550.github.io/chugaku_censor/" class="card">
+            <div class="card-body">
+                <div class="card-meta">
+                    <span>VOL.01 / INFRARED</span>
+                    <span>NEW ✨</span>
+                </div>
+                <h4 class="card-title">熱を測るカメラ（サーモグラフィ）の秘密</h4>
+                <p class="card-text">
+                    カメラ自身が電気で動いて熱くなるのに、どうして相手の熱を正確に測れるの？「マイクロボロメータ」と「内部熱雑音の相殺」の仕組みを中学生向けに超わかりやすく図解！
+                </p>
+            </div>
+            <div class="card-footer">
+                授業をうける <i class="fas fa-chevron-right"></i>
+            </div>
+        </a>
+
+        <div class="card" style="opacity: 0.4; cursor: not-allowed; pointer-events: none;">
+            <div class="card-body">
+                <div class="card-meta">
+                    <span>VOL.02 / COMING SOON</span>
+                    <span>PREPARING</span>
+                </div>
+                <h4 class="card-title">宇宙を飛ぶ半導体はどうやって身を守る？（予定）</h4>
+                <p class="card-text">
+                    宇宙を飛び交う目に見えない強い放射線。普通のスマホを宇宙に持っていくとすぐに壊れちゃう謎と、それを防ぐ「3重モジュール冗長」の秘密に迫ります。
+                </p>
+            </div>
+            <div class="card-footer">
+                準備中... <i class="fas fa-lock"></i>
+            </div>
+        </div>
+
+        </div>
+</div>
+
+<footer>
+    © 2026 CHRONIX Global Link - Junior High Tech Academy. All Rights Reserved.
+</footer>
+
+</body>
+</html>
